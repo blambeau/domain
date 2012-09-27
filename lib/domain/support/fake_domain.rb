@@ -16,7 +16,7 @@ module Domain
       def new(*args)
         if (args.size == 1) && self===args.first
           return args.first
-        elsif superclass.respond_to?(:new)
+        elsif superclass.respond_to?(:new) && (superclass != Object)
           return new super(*args)
         end
         args_error_on_new(args)
@@ -24,7 +24,7 @@ module Domain
 
       # Checks if `value` belongs to this domain
       def ===(value)
-        (superclass === value) && predicate.call(value)
+        value.is_a?(superclass) && predicate && predicate.call(value)
       end
 
     private
