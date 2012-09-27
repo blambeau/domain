@@ -7,7 +7,7 @@ variables:
   upper:
     Domain
   version:
-    0.1.0
+    1.0.0.rc1
   summary: |-
     Provide tools for implementing domains (aka data types)
   description: |-
