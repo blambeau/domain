@@ -1,6 +1,7 @@
 require_relative 'factory/union'
 require_relative 'factory/sbyc'
 require_relative 'factory/scalar'
+require_relative 'factory/reuse'
 module Domain
   module Factory
     

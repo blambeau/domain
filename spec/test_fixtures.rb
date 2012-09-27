@@ -14,3 +14,8 @@ describe Point do
   subject{ Point }
   it_should_behave_like 'a domain class'
 end
+
+describe List do
+  subject{ List }
+  it_should_behave_like 'a domain class'
+end
