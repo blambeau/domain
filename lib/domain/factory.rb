@@ -1,3 +1,6 @@
+require_relative 'factory/union'
+require_relative 'factory/sbyc'
+require_relative 'factory/scalar'
 module Domain
   module Factory
     
