@@ -1,50 +1,32 @@
 module Domain
-  class Scalar < Module
+  module Scalar
 
-    def initialize(*component_names)
-      @component_names = component_names
-      define_initialize
-      define_component_readers
-      define_to_hash_method
-      define_equality_methods
-    end
-
-    def included(clazz)
-      clazz.extend(Domain)
-      super
-    end
-
-  private
-
-    def define_initialize
-      component_names = @component_names
-      define_method(:initialize) do |*args|
-        component_names.zip(args).each do |n,arg|
-          instance_variable_set(:"@#{n}", arg)
+    def self.new(*component_names)
+      i_methods = Module.new{
+        include Equalizer.new(component_names)
+        define_method(:initialize) do |*args|
+          component_names.zip(args).each do |n,arg|
+            instance_variable_set(:"@#{n}", arg)
+          end
         end
-      end
-    end
-
-    def define_component_readers
-      @component_names.each do |n|
-        define_method(n) do
-          instance_variable_get(:"@#{n}")
+        component_names.each do |n|
+          define_method(n) do
+            instance_variable_get(:"@#{n}")
+          end
         end
-      end
-    end
-
-    def define_to_hash_method
-      component_names = @component_names
-      define_method(:to_hash) do
-        component_names.each_with_object({}) do |n,h|
-          h[n] = instance_variable_get(:"@#{n}")
+        define_method(:to_hash) do
+          component_names.each_with_object({}) do |n,h|
+            h[n] = instance_variable_get(:"@#{n}")
+          end
         end
-      end
-    end
-
-    def define_equality_methods
-      component_names = @component_names
-      module_eval{ include Equalizer.new(component_names) }
+      }
+      Module.new{
+        include Domain
+        define_singleton_method(:extend_object) do |obj|
+          obj.module_eval{ include(i_methods) } if obj.is_a?(Class)
+          super(obj)
+        end
+      }
     end
 
   end # class Scalar

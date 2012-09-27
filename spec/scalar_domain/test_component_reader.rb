@@ -1,4 +1,4 @@
-require 'domain'
+require 'spec_helper'
 module Domain
   describe Scalar, "component reader" do
 
