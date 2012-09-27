@@ -2,38 +2,18 @@ module Domain
   class SByC < Module
 
     def initialize(super_domain = Object, sub_domains = [], predicate = nil, &bl)
-      @super_domain = super_domain
-      @sub_domains = sub_domains
-      @predicate = predicate || bl
-      define
+      predicate ||= bl
+      @class_module = Module.new{
+        include Domain, TypeMethods
+        define_method(:super_domain){ super_domain }
+        define_method(:sub_domains){ sub_domains }
+        define_method(:predicate){ predicate }
+      }
     end
 
-  private
-
-    def define
-      define_super_domain_method
-      define_sub_domains_method
-      define_predicate_method
-      include_type_methods
-    end
-
-    def define_super_domain_method
-      super_domain = @super_domain
-      define_method(:super_domain){ super_domain }
-    end
-
-    def define_sub_domains_method
-      sub_domains = @sub_domains
-      define_method(:sub_domains){ sub_domains }
-    end
-
-    def define_predicate_method
-      predicate = @predicate
-      define_method(:predicate){ predicate }
-    end
-
-    def include_type_methods
-      module_eval{ include TypeMethods }
+    def included(clazz)
+      clazz.extend(@class_module)
+      super
     end
 
     module TypeMethods

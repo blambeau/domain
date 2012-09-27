@@ -1,3 +1,3 @@
 class NegInt < Integer
-  extend Domain::SByC.new(Integer){|i| i<0}
+  include Domain::SByC.new(Integer){|i| i<0}
 end
