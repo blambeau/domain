@@ -13,8 +13,12 @@ module Domain
     def self.instance_module(reuse_domain)
       Module.new{
         define_method(:initialize) do |arg|
-          raise ArgumentError unless reuse_domain===arg
-          raise ArgumentError if self.class.predicate && !self.class.predicate.call(arg)
+          unless reuse_domain===arg
+            raise ArgumentError, "#{reuse_domain} expected, got `#{arg.inspect}`"
+          end
+          if self.class.predicate && !self.class.predicate.call(arg)
+            raise ArgumentError, "Invalid value `#{arg.inspect}` for `#{self}`"
+          end
           @reused_instance = arg
         end
         define_method(:reused_instance) do
