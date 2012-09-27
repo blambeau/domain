@@ -1,3 +1,3 @@
 class Boolean
-  extend Domain::Union.new(Object, [TrueClass, FalseClass])
+  extend Domain::Union.new(TrueClass, FalseClass)
 end

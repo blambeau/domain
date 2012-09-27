@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe Domain, "union" do
 
-  subject{ Domain.union(Object, [TrueClass, FalseClass]) }
+  subject{ Domain.union(TrueClass, FalseClass) }
 
   it_should_behave_like 'a domain class'
 

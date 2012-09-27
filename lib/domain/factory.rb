@@ -31,8 +31,8 @@ module Domain
     #   the created domain as a ruby Class
     #
     # @api public
-    def union(super_domain, sub_domains)
-      Class.new(super_domain){ extend Union.new(super_domain, sub_domains) }
+    def union(*sub_domains)
+      Class.new{ extend Union.new(*sub_domains) }
     end
 
     # Factors a scalar domain

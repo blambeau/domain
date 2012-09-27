@@ -1,9 +1,8 @@
 module Domain
   module Union
 
-    def self.new(super_domain, sub_domains)
-      predicate = lambda{|t| sub_domains.any?{|d| d===t } }
-      FakeDomain.new(super_domain, sub_domains, predicate)
+    def self.new(*sub_domains)
+      FakeDomain.new(Object, sub_domains, lambda{|t| sub_domains.any?{|d| d===t } })
     end
 
   end # class Union
