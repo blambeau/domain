@@ -1,14 +1,20 @@
 module Domain
   module Reuse
 
-    def self.new(reuse_domain)
-      ImplDomain.new Methods, instance_module(reuse_domain)
+    def self.new(reuse_domain, predicate = nil, &bl)
+      ImplDomain.new [ Methods, class_module(predicate || bl) ],
+                     [ instance_module(reuse_domain) ]
+    end
+
+    def self.class_module(predicate)
+      Module.new{ define_method(:predicate){ predicate } }
     end
 
     def self.instance_module(reuse_domain)
       Module.new{
         define_method(:initialize) do |arg|
           raise ArgumentError unless reuse_domain===arg
+          raise ArgumentError if self.class.predicate && !self.class.predicate.call(arg)
           @reused_instance = arg
         end
         define_method(:reused_instance) do
@@ -16,7 +22,7 @@ module Domain
         end
         protected :reused_instance
         include Equalizer.new(:reused_instance)
-      }      
+      }
     end
 
     module Methods

@@ -5,9 +5,9 @@ module Domain
       i_methods = Array(i_methods)
       c_methods = Array(c_methods).unshift(Domain)
       Module.new{
-        include(*c_methods)
+        c_methods.each{|c_m| include(c_m)}
         define_singleton_method(:extend_object) do |obj|
-          obj.module_eval{ include(*i_methods) } if obj.is_a?(Class)
+          obj.module_eval{ i_methods.each{|i_m| include(i_m)} } if obj.is_a?(Class)
           super(obj)
         end
       }

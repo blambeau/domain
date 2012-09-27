@@ -8,6 +8,7 @@ require_relative 'fixtures/neg_int'
 require_relative 'fixtures/boolean'
 require_relative 'fixtures/point'
 require_relative 'fixtures/list'
+require_relative 'fixtures/tuple'
 
 module Domain
 
