@@ -1,12 +1,12 @@
 module Domain
-  class SByC < Module
+  class Union < Module
 
-    def initialize(super_domain = Object, predicate = nil, &bl)
-      predicate ||= bl
+    def initialize(super_domain, sub_domains)
+      predicate = lambda{|t| sub_domains.any?{|d| d===t } }
       @class_module = Module.new{
         include Domain, FakeDomainMethods
         define_method(:super_domain){ super_domain }
-        define_method(:sub_domains) { []           }
+        define_method(:sub_domains) { sub_domains  }
         define_method(:predicate)   { predicate    }
       }
     end
@@ -16,5 +16,7 @@ module Domain
       super
     end
 
-  end # module SByC
+  end # class Union
 end # module Domain
+
+    

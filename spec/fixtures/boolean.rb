@@ -1,3 +1,3 @@
 class Boolean
-  include Domain::SByC.new(Object, [TrueClass, FalseClass]){|x| x==true || x==false}
+  include Domain::Union.new(Object, [TrueClass, FalseClass])
 end
