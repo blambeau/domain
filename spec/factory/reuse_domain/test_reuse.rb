@@ -4,18 +4,16 @@ module Domain
 
     let(:object){ List.new([1, 2, 3]) }
 
-    describe "map" do
-      subject{ object.map{|x| x*2} }
+    describe "size" do
+      subject{ object.size }
 
-      it{ should be_a(List) }
-      it{ should eq(List.new([2, 4, 6])) }
+      it{ should eq(3) }
     end
 
-    describe "reject" do
-      subject{ object.reject{|x| x%2 == 0} }
+    describe "empty?" do
+      subject{ object.empty? }
 
-      it{ should be_a(List) }
-      it{ should eq(List.new([1, 3])) }
+      it{ should be_false }
     end
 
   end

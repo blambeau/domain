@@ -27,7 +27,7 @@ module Domain
 
     module Methods
 
-      def delegate(*methods)
+      def reuse(*methods)
         methods.each do |m|
           define_method(m) do |*args, &bl|
             reused_instance.send(m, *args, &bl)
@@ -35,7 +35,7 @@ module Domain
         end
       end
 
-      def reuse(*methods)
+      def recoat(*methods)
         methods.each do |m|
           define_method(m) do |*args, &bl|
             self.class.new reused_instance.send(m, *args, &bl)
