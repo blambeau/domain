@@ -10,8 +10,13 @@ module Domain
     #   the proc to use to extract components that participate to equality
     #
     # @api private
-    def initialize(&bl)
-      define_method(:equality_components, &bl)
+    def initialize(components = nil, &bl)
+      extractor = case components
+                  when NilClass then bl
+                  when Symbol   then proc{ [ send(components) ] }
+                  when Array    then proc{ components.map{|n| send(n)} }
+                  end
+      define_method(:equality_components, &extractor)
       module_eval{ include(Methods) }
     end
 
