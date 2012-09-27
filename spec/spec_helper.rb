@@ -4,6 +4,14 @@ require_relative 'fixtures/neg_int'
 require_relative 'fixtures/boolean'
 require_relative 'fixtures/point'
 
+module Domain
+
+  def third_party_extension
+    true
+  end
+
+end
+
 module SpecHelpers
 end
 

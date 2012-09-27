@@ -9,6 +9,11 @@ module Domain
       define_equality_methods
     end
 
+    def included(clazz)
+      clazz.extend(Domain)
+      super
+    end
+
   private
 
     def define_initialize
