@@ -15,7 +15,7 @@ module Domain
   #
   # @api public
   def self.sbyc(superdom = Object, &pred)
-    Class.new(superdom){ include SByC.new(superdom, pred) }
+    Class.new(superdom){ extend SByC.new(superdom, pred) }
   end
 
   # Returns the domain predicate, nil if no such predicate
