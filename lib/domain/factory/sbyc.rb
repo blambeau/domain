@@ -3,7 +3,7 @@ module Domain
 
     def self.new(super_domain = Object, predicate = nil, &bl)
       predicate = predicate || bl || Domain::TRUE_PREDICATE
-      ImplDomain.new [ Methods, class_module(super_domain, predicate) ]
+      DomainFactory.factor [ Methods, class_module(super_domain, predicate) ]
     end
 
     def self.class_module(super_domain, predicate)

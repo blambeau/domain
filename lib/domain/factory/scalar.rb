@@ -2,7 +2,7 @@ module Domain
   module Scalar
 
     def self.new(*component_names)
-      ImplDomain.new [], instance_module(component_names)
+      DomainFactory.factor [], instance_module(component_names)
     end
 
     def self.instance_module(component_names)

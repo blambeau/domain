@@ -2,7 +2,7 @@ module Domain
   module Union
 
     def self.new(*sub_domains)
-      ImplDomain.new [ Methods, class_module(sub_domains) ]
+      DomainFactory.factor [ Methods, class_module(sub_domains) ]
     end
 
     def self.class_module(sub_domains)

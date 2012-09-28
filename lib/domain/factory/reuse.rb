@@ -3,8 +3,8 @@ module Domain
 
     def self.new(reuse_domain, predicate = nil, &bl)
       predicate = predicate || bl || Domain::TRUE_PREDICATE
-      ImplDomain.new [ Methods, class_module(reuse_domain, predicate) ],
-                     [ instance_module(reuse_domain) ]
+      DomainFactory.factor [ Methods, class_module(reuse_domain, predicate) ],
+                           [ instance_module(reuse_domain) ]
     end
 
     def self.class_module(reuse_domain, predicate)
