@@ -3,7 +3,7 @@ module Domain
 
     def self.new(reuse_domain, predicate = nil, &bl)
       predicate = predicate || bl || Domain::TRUE_PREDICATE
-      DomainFactory.factor [ Methods, class_module(reuse_domain, predicate) ],
+      DomainFactory.factor [ Helpers, class_module(reuse_domain, predicate) ],
                            [ instance_module(reuse_domain) ]
     end
 
@@ -31,7 +31,7 @@ module Domain
       }
     end
 
-    module Methods
+    module Helpers
 
       def reuse(*methods)
         methods.each do |m|
@@ -45,7 +45,7 @@ module Domain
         end
       end
 
-    end # module Methods
+    end # module Helpers
 
   end # module Reuse
 end # module Domain
