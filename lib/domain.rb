@@ -10,4 +10,6 @@ module Domain
   include API
   extend  Factory
 
+  TRUE_PREDICATE = lambda{|*args,&bl| true }
+
 end # module Domain

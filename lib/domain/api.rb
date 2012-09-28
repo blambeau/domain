@@ -1,18 +1,6 @@
 module Domain
   module API
 
-    TRUE_PREDICATE = lambda{|*args,&bl| true }
-
-    # Returns the domain internal predicate
-    #
-    # @return [Proc]
-    #   the domain internal predicate
-    #
-    # @api public
-    def predicate
-      TRUE_PREDICATE
-    end
-
     # Returns the super domain of `self`.
     #
     # @return [Class]

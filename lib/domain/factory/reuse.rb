@@ -2,7 +2,8 @@ module Domain
   module Reuse
 
     def self.new(reuse_domain, predicate = nil, &bl)
-      ImplDomain.new [ Methods, class_module(reuse_domain, predicate || bl) ],
+      predicate = predicate || bl || Domain::TRUE_PREDICATE
+      ImplDomain.new [ Methods, class_module(reuse_domain, predicate) ],
                      [ instance_module(reuse_domain) ]
     end
 
@@ -10,10 +11,9 @@ module Domain
       Module.new{
         define_method(:predicate) do
           predicate
-        end if predicate
+        end
         define_method(:domain_check!) do |i|
           domain_error!(i) unless reuse_domain===i && predicate.call(i)
-          self
         end
       }
     end
