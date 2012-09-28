@@ -9,6 +9,7 @@ require_relative 'fixtures/boolean'
 require_relative 'fixtures/point'
 require_relative 'fixtures/list'
 require_relative 'fixtures/tuple'
+require_relative 'fixtures/attr_list'
 
 module Domain
 
