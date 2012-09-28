@@ -6,7 +6,7 @@ module Domain
         include Domain, Methods
         define_method(:super_domain){ super_domain }
         define_method(:sub_domains) { sub_domains  }
-        define_method(:predicate)   { predicate    }
+        define_method(:predicate)   { predicate    } if predicate
       }
     end
 
@@ -21,7 +21,7 @@ module Domain
 
       # Checks if `value` belongs to this domain
       def ===(value)
-        value.is_a?(superclass) && predicate && predicate.call(value)
+        superclass===value && predicate.call(value)
       end
 
     end # module Methods

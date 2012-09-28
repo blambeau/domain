@@ -1,14 +1,16 @@
 module Domain
   module API
 
-    # Returns the domain predicate, nil if no such predicate
+    TRUE_PREDICATE = lambda{|*args,&bl| true }
+
+    # Returns the domain internal predicate
     #
     # @return [Proc]
-    #   the domain predicate (possibly nil)
+    #   the domain internal predicate
     #
     # @api public
     def predicate
-      nil
+      TRUE_PREDICATE
     end
 
     # Returns the super domain of `self`.

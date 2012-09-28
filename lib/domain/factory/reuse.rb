@@ -10,10 +10,9 @@ module Domain
       Module.new{
         define_method(:predicate) do
           predicate
-        end
+        end if predicate
         define_method(:domain_check!) do |i|
-          domain_error!(i) unless reuse_domain===i
-          domain_error!(i) if predicate && !predicate.call(i)
+          domain_error!(i) unless reuse_domain===i && predicate.call(i)
           self
         end
       }
