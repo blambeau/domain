@@ -13,24 +13,15 @@ module Domain
     module Methods
 
       # Creates a new instance of this domain
-      def new(*args)
-        if (args.size == 1) && self===args.first
-          return args.first
-        elsif superclass.respond_to?(:new) && (superclass != Object)
-          return new super(*args)
-        end
-        args_error_on_new(args)
+      def new(first = nil, *args)
+        return first if args.empty? && self===first
+        return new super(first, *args) if superclass.respond_to?(:new) && (superclass != Object)
+        domain_error!(first, *args)
       end
 
       # Checks if `value` belongs to this domain
       def ===(value)
         value.is_a?(superclass) && predicate && predicate.call(value)
-      end
-
-    private
-
-      def args_error_on_new(args)
-        raise ArgumentError, "Invalid value #{args.join(' ')} for #{self}", caller
       end
 
     end # module Methods

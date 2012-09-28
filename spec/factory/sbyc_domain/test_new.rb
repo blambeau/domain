@@ -6,16 +6,16 @@ module Domain
       NegInt.new(-12).should eq(-12)
     end
 
-    it 'raises an argument error when the value does not satisfy the predicate' do
+    it 'raises a type error when the value does not satisfy the predicate' do
       lambda{
         NegInt.new(12)
-      }.should raise_error(ArgumentError)
+      }.should raise_error(TypeError)
     end
 
-    it 'raises an argument error when the value is not a superclazz value' do
+    it 'raises a type error when the value is not a superclazz value' do
       lambda{
         NegInt.new("bla")
-      }.should raise_error(ArgumentError)
+      }.should raise_error(TypeError)
     end
 
   end

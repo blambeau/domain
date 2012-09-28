@@ -7,10 +7,10 @@ module Domain
       Boolean.new(false).should be(false)
     end
 
-    it 'raises an argument error when the value is not a superclazz value' do
+    it 'raises a type when the value is not a superclazz value' do
       lambda{
         Boolean.new("12")
-      }.should raise_error(ArgumentError)
+      }.should raise_error(TypeError)
     end
 
   end
