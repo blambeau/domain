@@ -68,7 +68,7 @@ module Domain
 
       context 'with equivalent of a subclass' do
         let(:other){ Class.new(domain).new(1, 2) }
-        it{ should be_false }
+        it{ should be_true }
       end
 
       context 'with non equivalent' do

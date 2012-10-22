@@ -31,21 +31,6 @@ module Domain
         equality_components.map{|c| c.hash }.reduce(self.class.hash, :^)
       end
 
-      # Compare the object with other object for equality
-      #
-      # @example
-      #   object.eql?(other)  # => true or false
-      #
-      # @param [Object] other
-      #   the other object to compare with
-      #
-      # @return [Boolean]
-      #
-      # @api public
-      def eql?(other)
-        instance_of?(other.class) and cmp?(__method__, other)
-      end
-
       # Compare the object with other object for equivalency
       #
       # @example
@@ -61,6 +46,7 @@ module Domain
         return false unless self.class <=> other.class
         cmp?(__method__, other)
       end
+      alias :eql? :==
 
     private
 
