@@ -1,16 +1,6 @@
 module Domain
   module API
 
-    # Returns the super domain of `self`.
-    #
-    # @return [Class]
-    #   the super domain of `self` as a ruby class
-    #
-    # @api public
-    def super_domain
-      superclass
-    end
-
     # Returns the sub domains of `self`.
     #
     # @return [Array]
