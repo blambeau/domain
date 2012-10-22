@@ -8,6 +8,8 @@ module Domain
     def self.class_module(sub_domains)
       Module.new{
         define_method(:sub_domains){ sub_domains }
+        define_method(:>) {|other| sub_domains.include?(other)     }
+        define_method(:>=){|other| (self > other) || (self==other) }
       }
     end
 

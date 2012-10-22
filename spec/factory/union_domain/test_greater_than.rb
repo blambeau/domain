@@ -1,17 +1,17 @@
 require 'spec_helper'
 module Domain
-  describe Union, "super_domain_of?" do
+  describe Union, ">" do
 
     it 'returns true when a super domain' do
-      Boolean.should be_super_domain_of(TrueClass)
+      (Boolean > TrueClass).should be_true
     end
 
     it 'returns false on itself' do
-      Boolean.should_not be_super_domain_of(Boolean)
+      (Boolean > Boolean).should be_false
     end
 
     it 'returns false when not a super domain' do
-      Boolean.should_not be_super_domain_of(Integer)
+      (Boolean > Integer).should be_false
     end
 
   end
