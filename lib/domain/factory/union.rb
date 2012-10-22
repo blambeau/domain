@@ -2,14 +2,12 @@ module Domain
   module Union
 
     def self.new(*sub_domains)
-      DomainFactory.factor [ Methods, class_module(sub_domains) ]
+      DomainFactory.factor [ Methods, Comparisons, class_module(sub_domains) ]
     end
 
     def self.class_module(sub_domains)
       Module.new{
         define_method(:sub_domains){ sub_domains }
-        define_method(:>) {|other| sub_domains.include?(other)     }
-        define_method(:>=){|other| (self > other) || (self==other) }
       }
     end
 
@@ -29,6 +27,22 @@ module Domain
       # Checks if `value` belongs to this domain
       def ===(value)
         predicate.call(value)
+      end
+
+      # Compares with another domain
+      def <=>(other)
+        mine, yours = sub_domains_of(self), sub_domains_of(other)
+        return 0  if self==other || mine==yours
+        return -1 if mine.subset?(yours)
+        return 1  if mine.superset?(yours)
+        return nil
+      end
+
+    private
+
+      def sub_domains_of(x)
+        return x.sub_domains.to_set if x.respond_to?(:sub_domains)
+        [ x ].to_set
       end
 
     end # module Methods
