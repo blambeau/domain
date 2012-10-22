@@ -35,7 +35,7 @@ module Domain
         return 0  if self==other || mine==yours
         return -1 if mine.subset?(yours)
         return 1  if mine.superset?(yours)
-        return nil
+        super
       end
 
     private

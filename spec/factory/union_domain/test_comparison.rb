@@ -22,6 +22,10 @@ module Domain
       (Domain.union(TrueClass) <=> Boolean).should eq(-1)
     end
 
+    it 'returns -1 when compared with Object' do
+      (Boolean <=> Object).should eq(-1)
+    end
+
     it 'returns nil when not a super domain' do
       (Boolean <=> Integer).should be_nil
     end
