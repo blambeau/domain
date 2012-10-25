@@ -28,7 +28,7 @@ module Domain
       #
       # @api public
       def hash
-        equality_components.map{|c| c.hash }.reduce(self.class.hash, :^)
+        equality_components.map{|c| c.hash }.reduce(Object.hash, :^)
       end
 
       # Compare the object with other object for equivalency

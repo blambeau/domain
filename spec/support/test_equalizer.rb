@@ -88,6 +88,10 @@ module Domain
       it 'should be consistent with equal' do
         subject.should eq(domain.new(1,2).hash)
       end
+
+      it 'should not be subclass dependent' do
+        subject.should eq(Class.new(domain).new(1,2).hash)
+      end
     end
 
   end
