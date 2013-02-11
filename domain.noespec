@@ -1,13 +1,13 @@
 template-info:
   name: "rubygem.noe"
-  version: 2.0.0
+  version: 2.0.1
 variables:
   lower:
     domain
   upper:
     Domain
   version:
-    1.0.0.rc5
+    1.0.0
   summary: |-
     Provide tools for implementing domains (aka data types)
   description: |-
